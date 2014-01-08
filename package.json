@@ -1,0 +1,15 @@
+{
+  "name": "craftyframework",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-css": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-coffee": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-html-build": "latest"
+  }
+}
