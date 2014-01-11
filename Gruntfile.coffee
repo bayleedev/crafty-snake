@@ -7,31 +7,47 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-html-build"
+  grunt.loadNpmTasks "grunt-mocha"
 
   ###
-  Copys images, compiles coffee, compiles less,
-  and creates the html page.
   ###
+  grunt.registerTask "build:test", [
+    "clean:build",
+    "copy:js",
+    "copy:img",
+    "copy:css",
+    "copy:test",
+    "coffee:build",
+    "coffee:build_tests",
+    "htmlbuild:build",
+    "mocha:test",
+  ]
+
+  ###
+  # Copys images, compiles coffee, compiles less,
+  # and creates the html page.
+  ###
+  grunt.registerTask "build:dev", ["build"]
   grunt.registerTask "build", [
     "clean:build",
     "copy:img",
     "copy:js",
     "copy:css",
-    "coffee:build",
+    "coffee:build_dev",
     "less:build",
     "htmlbuild:build",
   ]
 
   ###
-  Production build also compiles all styles and
-  scripts to a single file and minifies.
+  # Production build also compiles all styles and
+  # scripts to a single file and minifies.
   ###
-  grunt.registerTask "build:production", [
+  grunt.registerTask "build:prod", [
     "clean:build",
     "copy:img",
     "copy:js",
     "copy:css",
-    "coffee:compile",
+    "coffee:build",
     "less:build",
     "uglify:build",
     "cssmin:build",
@@ -41,7 +57,7 @@ module.exports = (grunt) ->
   ]
 
   ###
-  Does a development build, then watches for changes.
+  # Does a development build, then watches for changes.
   ###
   grunt.registerTask "build:watch", [
     "build",
@@ -49,12 +65,21 @@ module.exports = (grunt) ->
   ]
 
   grunt.initConfig
+    mocha:
+      test:
+        src: ['build/test.html']
+        options:
+          run: true
     watch:
       dev:
-        files: ["Gruntfile.coffee", "src/**/*"]
+        files: ["src/**/*"]
         tasks: ["build"]
 
     clean:
+      test:
+        src: ["test/**/*"]
+        options:
+          "no-write": false
       build:
         src: ["build/**/*"]
         options:
@@ -83,7 +108,7 @@ module.exports = (grunt) ->
           cwd: "src/assets/css/"
           expand: true
           flatten: false
-          src: ["**/*.css"]
+          src: ["**/*.css", "!vendor/mocha.css"]
           dest: "build/css"
           filter: "isFile"
         ]
@@ -92,8 +117,21 @@ module.exports = (grunt) ->
           cwd: "src/assets/js/"
           expand: true
           flatten: false
-          src: ["**/*.js"]
+          src: ["**/*.js", "!vendor/chai.js", "!vendor/mocha.js"]
           dest: "build/js"
+          filter: "isFile"
+        ]
+      test:
+        files: [
+          cwd: "src/assets/"
+          expand: true
+          flatten: false
+          src: [
+            "js/vendor/mocha.js",
+            "js/vendor/chai.js",
+            "css/vendor/mocha.css",
+          ]
+          dest: "build/"
           filter: "isFile"
         ]
 
@@ -104,7 +142,15 @@ module.exports = (grunt) ->
           "build/css/main.css": ["src/assets/css/main.less"]
 
     coffee:
-      build:
+      build_tests:
+        files: [
+          expand: true
+          cwd: "src/assets/js/"
+          src: ["spec/**/*.coffee"]
+          dest: "build/js/"
+          ext: ".js"
+        ]
+      build_dev:
         files: [
           expand: true
           cwd: "src/assets/js/"
@@ -112,9 +158,17 @@ module.exports = (grunt) ->
           dest: "build/js/"
           ext: ".js"
         ]
-      compile:
-        files:
-          "build/js/app.js": ["src/assets/js/**/*.coffee"]
+      build:
+        options:
+          join: true
+        files: [
+          'build/js/core.js': [
+            "src/assets/js/game.coffee",
+            "src/assets/js/models/**/*.coffee",
+            "src/assets/js/**/*.coffee",
+            "!src/assets/js/spec/**/*.coffee",
+          ],
+        ]
 
     cssmin:
       build:
@@ -129,12 +183,17 @@ module.exports = (grunt) ->
     uglify:
       build:
         files: [
-          'build/js/app.min.js': ['build/js/**/*.js'],
+          'build/js/app.min.js': [
+            "build/js/vendor/underscore.js",
+            "build/js/vendor/backbone.js",
+            "build/js/vendor/crafty.js",
+            "build/js/core.js",
+          ],
         ]
 
     htmlbuild:
       build:
-        src: "src/index.html"
+        src: ["src/index.html", "src/test.html"]
         dest: "build/"
         options:
           scripts:
@@ -145,6 +204,16 @@ module.exports = (grunt) ->
               "build/js/game.js",
               "build/js/models/**/*.js",
               "build/js/**/*.js",
+              "!build/js/spec/**/*.js",
+              "!build/js/vendor/mocha.js",
+              "!build/js/vendor/chai.js",
+            ]
+            test: [
+              "build/js/vendor/mocha.js",
+              "build/js/vendor/chai.js",
+            ]
+            spec: [
+              "build/js/spec/**/*.js",
             ]
           styles:
             bundle: ["build/css/**/*.css"]
