@@ -51,7 +51,7 @@ module.exports = (grunt) ->
   grunt.initConfig
     watch:
       dev:
-        files: ["src/**/*"]
+        files: ["Gruntfile.coffee", "src/**/*"]
         tasks: ["build"]
 
     clean:
@@ -138,6 +138,13 @@ module.exports = (grunt) ->
         dest: "build/"
         options:
           scripts:
-            bundle: ["build/js/vendor/**/*.js", "build/js/**/*.js"]
+            bundle: [
+              "build/js/vendor/underscore.js",
+              "build/js/vendor/backbone.js",
+              "build/js/vendor/crafty.js",
+              "build/js/game.js",
+              "build/js/models/**/*.js",
+              "build/js/**/*.js",
+            ]
           styles:
             bundle: ["build/css/**/*.css"]
