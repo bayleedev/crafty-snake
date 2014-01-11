@@ -1,24 +1,12 @@
-window.Game =
-  map_grid:
-    width: 40
-    height: 40
-    tile:
-      width: 16
-      height: 16
+class Game
+  models: {}
 
-  width: ->
-    @map_grid.width * @map_grid.tile.width
+  board: ->
+    @_board ||= new @models.Board
 
-  height: ->
-    @map_grid.height * @map_grid.tile.height
-
-  last_bottom_block: ->
-    @map_grid.height - 1
-
-  last_right_block: ->
-    @map_grid.width - 1
-
-  start: ->
-    Crafty.init Game.width(), Game.height()
+  start: =>
+    Crafty.init @board().width(), @board().height()
     Crafty.background "Silver"
     Crafty.scene "Start"
+
+window.game = new Game

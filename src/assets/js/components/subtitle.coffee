@@ -4,4 +4,4 @@ Crafty.c "Subtitle",
       .textFont(size: "20px")
       .css("text-align": "center")
       .attr
-        w: Game.width()
+        w: game.board().width()

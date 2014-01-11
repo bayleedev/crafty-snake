@@ -4,4 +4,4 @@ Crafty.c "Title",
       .textFont(size: "25px")
       .css("text-align": "center")
       .attr
-        w: Game.width()
+        w: game.board().width()

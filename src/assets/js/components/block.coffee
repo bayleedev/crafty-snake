@@ -1,4 +1,4 @@
 Crafty.c "Block",
   init: ->
-    @requires('2D, Canvas, Grid, Color')
+    @requires('2D, Solid, Canvas, Grid, Color')
       .color('Gray')
