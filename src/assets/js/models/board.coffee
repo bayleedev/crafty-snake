@@ -1,4 +1,4 @@
-game.models.Board = Backbone.Model.extend
+Crafty.c "Board",
 
   map_grid:
     width: 40

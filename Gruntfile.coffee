@@ -10,6 +10,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-mocha"
 
   ###
+  # Creates the test env for crafty.
   ###
   grunt.registerTask "build:test", [
     "clean:build",

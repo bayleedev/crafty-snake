@@ -1,2 +1,2 @@
-game.models.Snake = Backbone.Model.extend
+Crafty.c "Snake",
   # Erm...
