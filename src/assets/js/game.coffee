@@ -2,7 +2,7 @@ class Game
   models: {}
 
   board: ->
-    @_board ||= Crafty.m('Board')
+    @_board ||= Crafty.e('Board')
 
   start: =>
     Crafty.init @board().width(), @board().height()
