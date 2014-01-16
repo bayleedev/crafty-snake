@@ -1,4 +1,6 @@
 # Controls multiple snake_piece entities.
+# TODO - Don't create/delete snake pieces so often
+#        try moving them instead
 Crafty.c "Snake",
 
   interval: null
@@ -7,6 +9,9 @@ Crafty.c "Snake",
     @requires('Model, Directional')
     @add_piece()
     @bind 'EnterFrame', @move_snake
+
+  remove: ->
+    @unbind 'EnterFrame', @move_snake
 
   add_piece: (direction = [1,1]) ->
     Crafty.e('SnakePiece').at(direction[0], direction[1])

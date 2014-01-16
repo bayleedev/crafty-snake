@@ -1,29 +1,31 @@
 Crafty.c "Directional",
 
-  UP: 0
-  RIGHT: 1
-  DOWN: 2
-  LEFT: 3
+  UP: 1
+  RIGHT: 2
+  DOWN: 3
+  LEFT: 4
 
   button_to_direction:
-    UP_ARROW: @UP
-    DOWN_ARROW: @DOWN
-    RIGHT_ARROW: @RIGHT
-    LEFT_ARROW: @LEFT
+    K: 1
+    L: 2
+    J: 3
+    H: 4
 
   init: ->
-    @requires('Model')
+    @requires('Model, Keyboard')
     @data(
-      direction: @RIGHT
+      direction: @DOWN
       at: [1,1]
     )
+    @bind 'KeyDown', @change_direction
 
-  bind_key_events: ->
-    @bind 'KeyDown', ->
-      for key, value of Crafty.keys
-        for key,value of @button_to_direction
-          if e.key == Crafty.keys[key]
-            return @data(direction: value)
+  remove: ->
+    @unbind 'KeyDown', @change_direction
+
+  change_direction: (e) ->
+    for key,value of @button_to_direction
+      if e.key == Crafty.keys[key]
+        return @data(direction: value)
 
   next_direction: ->
     at = @data('at')

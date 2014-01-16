@@ -6,5 +6,5 @@ Crafty.scene "Start", ->
 
   Crafty.e("Subtitle").at(0, 12).text "H, J, K, L"
 
-  Crafty.e("Keyboard").bind 'KeyDown', ->
+  Crafty.e("Keyboard").one 'KeyDown', ->
     Crafty.scene 'Game'
