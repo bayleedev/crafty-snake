@@ -41,4 +41,4 @@ Crafty.c "Directional",
     at
 
   move_to_next_direction: ->
-    @data(at: next_direction)
+    @data(at: @next_direction())
