@@ -14,7 +14,7 @@ Crafty.c "Directional",
   init: ->
     @requires('Model, Keyboard')
     @data(
-      direction: @DOWN
+      direction: @RIGHT
       at: [1,1]
     )
     @bind 'KeyDown', @change_direction
