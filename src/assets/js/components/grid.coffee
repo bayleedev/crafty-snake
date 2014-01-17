@@ -2,16 +2,16 @@ Crafty.c "Grid",
   init: ->
     board = game.board()
     @attr
-      w: board.map_grid.tile.width
-      h: board.map_grid.tile.height
+      w: board.grid_width()
+      h: board.grid_height()
 
   at: (x, y) ->
     board = game.board()
     if x? and y?
       @attr
-        x: x * board.map_grid.tile.width
-        y: y * board.map_grid.tile.height
+        x: x * board.grid_width()
+        y: y * board.grid_height()
       @
     else
-      x: @x / board.map_grid.tile.width
-      y: @y / board.map_grid.tile.height
+      x: @x / board.grid_width()
+      y: @y / board.grid_height()

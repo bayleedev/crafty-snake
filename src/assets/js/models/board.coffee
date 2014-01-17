@@ -21,6 +21,12 @@ Crafty.c "Board",
   last_right_block: ->
     @map_grid.width - 1
 
+  grid_width: ->
+    @map_grid.tile.width
+
+  grid_height: ->
+    @map_grid.tile.width
+
   taken: (x, y) ->
     for item in Crafty('Solid Grid')
       at = Crafty(item).at()
