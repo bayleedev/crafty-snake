@@ -9,6 +9,12 @@ Crafty.c "Board",
       width: 16
       height: 16
 
+  grid_width: ->
+    @map_grid.width
+
+  grid_height: ->
+    @map_grid.width
+
   width: ->
     @map_grid.width * @map_grid.tile.width
 
