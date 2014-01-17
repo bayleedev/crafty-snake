@@ -26,5 +26,5 @@ Crafty.c "Popup",
 
   # Creates the new popup!
   popup: ->
-    delete()
+    @delete()
     create.apply(@, pick_location())
