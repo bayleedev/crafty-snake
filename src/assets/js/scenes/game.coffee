@@ -1,3 +1,8 @@
 Crafty.scene "Game", ->
+
   Crafty.e("Borders")
-  window.snake = Crafty.e("Snake")
+
+  snake = Crafty.e("Snake")
+
+  snake.one 'Die', ->
+    Crafty.scene 'GameOver'
