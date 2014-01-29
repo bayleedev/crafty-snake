@@ -1,4 +1,4 @@
-Crafty.c "Directional",
+Crafty.c "SnakeDirectional",
 
   UP: 1
   RIGHT: 2
