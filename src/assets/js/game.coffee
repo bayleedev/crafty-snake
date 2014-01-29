@@ -8,6 +8,6 @@ class Game
     Crafty.init @board().width(), @board().height()
     Crafty.background "Silver"
     Crafty.scene "Start"
-    Crafty.timer.FPS 3
+    Crafty.timer.FPS 10
 
 window.game = new Game

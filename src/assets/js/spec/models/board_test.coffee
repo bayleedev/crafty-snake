@@ -2,6 +2,11 @@ subject = game.board()
 
 describe 'Board', ->
 
+  beforeEach (done) ->
+    Crafty('Grid').each ->
+      @destroy()
+    done()
+
   describe '#taken', ->
 
     beforeEach (done) ->
@@ -33,3 +38,34 @@ describe 'Board', ->
 
     it 'returns tiles high * tile height', ->
       expect(subject.height()).to.equal(60)
+
+  describe '#at', ->
+    first = second = null
+
+    describe 'single item', ->
+
+      beforeEach (done) ->
+        first = Crafty.e('Solid, Grid').at(1,1)
+        done()
+
+      it 'returns a single object', ->
+        expect(subject.at(1, 1).length).to.equal(1)
+
+      it 'gives specific created item', ->
+        expect(subject.at(1, 1)[0]).to.equal(first)
+
+    describe 'multiple items', ->
+
+      beforeEach (done) ->
+        first = Crafty.e('Solid, Grid').at(1,1)
+        second = Crafty.e('Solid, Grid').at(1,1)
+        done()
+
+      it 'returns a single object', ->
+        expect(subject.at(1, 1).length).to.equal(2)
+
+      it 'first item gives specific created item', ->
+        expect(subject.at(1, 1)[0]).to.equal(first)
+
+      it 'second item gives specific created item', ->
+        expect(subject.at(1, 1)[1]).to.equal(second)
