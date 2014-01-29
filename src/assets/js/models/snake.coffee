@@ -4,7 +4,7 @@ Crafty.c "Snake",
   interval: null
 
   init: ->
-    @requires('Model, Directional')
+    @requires('Model, SnakeDirectional, GridCollision')
     @data(pieces: [], last_piece: 0)
     @bind 'EnterFrame', @move_snake
     @add_piece()
