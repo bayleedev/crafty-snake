@@ -22,3 +22,12 @@ Crafty.c "Snake",
     piece.at.apply(piece, @next_direction())
     @data('pieces').push(piece)
     @move_to_next_direction()
+
+  hit: ->
+    # delegate to grow/die
+
+  grow: ->
+    # grow snake, skip move
+
+  die: ->
+    # die, trigger die event
