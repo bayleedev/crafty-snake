@@ -5,7 +5,7 @@ This is my second attempt at an HTML5 game. This time I'm attempting to embrace 
  * [CoffeeScript](http://coffeescript.org/) Making my js pretty.
  * [LESS](http://lesscss.org/) because.
  * [Grunt](http://gruntjs.com/) for automation of compiling less/coffee.
- * [Mocha](http://visionmedia.github.io/mocha/) for unit testing.
+ * [Mocha](http://mochajs.org/) for unit testing.
  * [Travis](https://travis-ci.org/) for CI
  
 I'm currently trying to implement models into Crafty to make data between two components share-able. We'll see how it goes!
